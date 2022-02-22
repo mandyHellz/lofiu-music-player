@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useRef, useState } from "react";
 import Library from "../components/LibraryUI/Library";
+import Nav from "../components/Nav/Nav";
 import Player from "../components/Player/Player";
 import Song from "../components/Song/Song";
 import chillHopSongs from "../utils/utils";
@@ -15,6 +16,7 @@ const Home: NextPage = () => {
     currentTime: 0,
     duration: 0,
   });
+  const [libraryStatus, setLibraryStatus] = useState(false);
 
   const timeUpdateHandler = (e: any) => {
     const current = e.target.currentTime;
@@ -33,6 +35,10 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="mx-auto py-20">
+        <Nav
+          libraryStatus={libraryStatus}
+          setLibraryStatus={setLibraryStatus}
+        />
         <Song currentSong={currentSong} />
         <Player
           audioRef={audioRef}
@@ -48,6 +54,7 @@ const Home: NextPage = () => {
           audioRef={audioRef}
           isPlaying={isPlaying}
           setSongs={setSongs}
+          libraryStatus={libraryStatus}
         />
         <audio
           ref={audioRef}

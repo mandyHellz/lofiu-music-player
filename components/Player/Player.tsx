@@ -64,7 +64,7 @@ const Player = ({
           type="range"
           className="w-full py-1"
           min={0}
-          max={songTime.duration}
+          max={songTime.duration || 0}
           value={songTime.currentTime}
           onChange={draggableHandler}
         />
