@@ -52,7 +52,7 @@ const Library = ({
         libraryStatus ? "-translate-x-full" : "translate-x-0"
       } 
         transform -translate-x-full transition duration-700 ease-in fixed top-0 left-0 md:w-1/4 
-        md:overflow-scroll w-full h-full bg-white drop-shadow-lg shadow-lg`}
+        overflow-scroll w-full h-full bg-white drop-shadow-lg shadow-lg`}
     >
       <p className="p-5 text-2xl">Library List</p>
       <div className="library-songs">

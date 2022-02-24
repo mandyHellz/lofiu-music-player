@@ -143,7 +143,7 @@ const Player = ({
 
   return (
     <div className="w-full flex flex-col items-center justify-between">
-      <div className="time-control w-2/3 md:w-1/3 flex items-center gap-2">
+      <div className="time-control w-4/5 md:w-1/3 flex items-center gap-2">
         <p>{timeFormater(songTime.currentTime)}</p>
         <div
           style={{
