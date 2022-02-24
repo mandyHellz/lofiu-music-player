@@ -1,27 +1,44 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useRef, useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import Library from "../components/LibraryUI/Library";
 import Nav from "../components/Nav/Nav";
 import Player from "../components/Player/Player";
 import Song from "../components/Song/Song";
-import chillHopSongs from "../utils/utils";
+import chillHopSongs from "../data/data";
 
 const Home: NextPage = () => {
-  const audioRef = useRef(null);
+  const audioRef: MutableRefObject<any> = useRef(null);
   const [songs, setSongs] = useState(chillHopSongs());
   const [currentSong, setCurrentSong] = useState(songs[0]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [songTime, setSongTime] = useState({
     currentTime: 0,
     duration: 0,
+    animationPercentage: 0,
   });
   const [libraryStatus, setLibraryStatus] = useState(false);
 
   const timeUpdateHandler = (e: any) => {
     const current = e.target.currentTime;
     const duration = e.target.duration;
-    setSongTime({ ...songTime, currentTime: current, duration: duration });
+    // calculate percentage
+    const roundedCurrent = Math.round(current);
+    const roundedDuration = Math.round(duration);
+    const animationPerc = Math.round((roundedCurrent / roundedDuration) * 100);
+
+    setSongTime({
+      ...songTime,
+      currentTime: current,
+      duration: duration,
+      animationPercentage: animationPerc,
+    });
+  };
+
+  const songEndHandler = async () => {
+    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
+    await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
+    if (isPlaying) audioRef.current.play();
   };
 
   return (
@@ -34,7 +51,7 @@ const Home: NextPage = () => {
         </style>
       </Head>
 
-      <div className="mx-auto py-20">
+      <div className={`App ${!libraryStatus ? "library-active" : ""} md:pt-20`}>
         <Nav
           libraryStatus={libraryStatus}
           setLibraryStatus={setLibraryStatus}
@@ -47,6 +64,9 @@ const Home: NextPage = () => {
           setIsPlaying={setIsPlaying}
           songTime={songTime}
           setSongTime={setSongTime}
+          songs={songs}
+          setCurrentSong={setCurrentSong}
+          setSongs={setSongs}
         />
         <Library
           songs={songs}
@@ -61,6 +81,7 @@ const Home: NextPage = () => {
           src={currentSong.audio}
           onTimeUpdate={timeUpdateHandler}
           onLoadedMetadata={timeUpdateHandler}
+          onEnded={songEndHandler}
         ></audio>
       </div>
     </>

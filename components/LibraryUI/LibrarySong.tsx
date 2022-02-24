@@ -38,7 +38,7 @@ const LibrarySong = ({
       active: boolean;
     }>
   >;
-  audioRef: MutableRefObject<null>;
+  audioRef: MutableRefObject<any>;
   isPlaying: boolean;
   setSongs: Dispatch<
     SetStateAction<
@@ -55,8 +55,8 @@ const LibrarySong = ({
   >;
   id: string;
 }) => {
-  const songSelectHandler = () => {
-    setCurrentSong(song);
+  const songSelectHandler = async () => {
+    await setCurrentSong(song);
 
     // add an active state
     const playNewSong = songs.map((song) => {
@@ -72,23 +72,16 @@ const LibrarySong = ({
     setSongs(playNewSong);
 
     // check if the song is playing
-    if (isPlaying) {
-      const playPromise = audioRef.current.play();
-      if (playPromise !== undefined) {
-        playPromise.then((audio) => {
-          audioRef.current.play();
-        });
-      }
-    }
+    if (isPlaying) audioRef.current.play();
   };
 
   return (
     <div
       onClick={songSelectHandler}
       className={`library-song flex items-center gap-x-10 md:gap-x-2 py-5 
-      cursor-pointer px-5 ${
+      cursor-pointer px-5 transition duration-500 ease ${
         song.active
-          ? "bg-gradient-to-r from-purple-pinky to-pretty-pink"
+          ? "bg-gradient-to-r from-light-orange to-pretty-pink"
           : "hover:bg-pretty-pink hover:bg-opacity-30"
       }`}
     >

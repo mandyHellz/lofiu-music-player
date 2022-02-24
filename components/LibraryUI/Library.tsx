@@ -49,9 +49,10 @@ const Library = ({
   return (
     <div
       className={`library ${
-        libraryStatus ? "-translate-x-full" : "translate-x-0 bg-opacity-80"
-      } transform -translate-x-full transition duration-700 ease-in md:fixed md:top-0 md:left-0 md:w-1/5 md:overflow-scroll 
-      w-full h-full bg-white drop-shadow-lg shadow-lg`}
+        libraryStatus ? "-translate-x-full" : "translate-x-0"
+      } 
+        transform -translate-x-full transition duration-700 ease-in fixed top-0 left-0 md:w-1/4 
+        md:overflow-scroll w-full h-full bg-white drop-shadow-lg shadow-lg`}
     >
       <p className="p-5 text-2xl">Library List</p>
       <div className="library-songs">

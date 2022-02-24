@@ -10,12 +10,16 @@ module.exports = {
       },
       fontFamily: {
         Lato: ["Lato, sans-serif"],
+        Lobster: ["Lobster, cursive, sans-serif"],
+        Comfortaa: ["Comfortaa, cursive, sans-serif"],
       },
       colors: {
         'light-purple': '#654ea3',
         'purple-pinky': '#A87FB5',
         'pretty-pink': '#eaafc8',
+        'coral-pink': "#D5767E",
         'light-orange': '#DDA479',
+        'medium-coral': '#DA826C',
       },
     },
   },

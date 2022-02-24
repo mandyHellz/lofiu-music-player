@@ -11,10 +11,11 @@ export default function Nav({
 }) {
   return (
     <nav className="h-20 flex justify-around items-center">
-      <p className="text-2xl font-medium">Waves</p>
+      <p className="text-6xl font-Lobster font-medium">Lofi u</p>
       <button
         onClick={() => setLibraryStatus(!libraryStatus)}
-        className="flex items-center bg-transparent hover:bg-gray-700 hover:text-white cursor-pointer border border-gray-600 transition-all duration-500 p-1"
+        className="flex items-center bg-transparent hover:bg-gray-700 hover:text-white cursor-pointer 
+        border border-gray-600 transition-all duration-500 p-1 z-10"
       >
         Library
         <FontAwesomeIcon icon={faMusic} className="w-5 h-5" />
