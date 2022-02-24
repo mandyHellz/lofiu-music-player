@@ -1,4 +1,5 @@
 import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { songsProps } from "../Typings/typings";
 import LibrarySong from "./LibrarySong";
 
 const Library = ({
@@ -9,41 +10,11 @@ const Library = ({
   setSongs,
   libraryStatus,
 }: {
-  songs: {
-    name: string;
-    cover: string;
-    artist: string;
-    audio: string;
-    color: string[];
-    id: string;
-    active: boolean;
-  }[];
-  setCurrentSong: Dispatch<
-    SetStateAction<{
-      name: string;
-      cover: string;
-      artist: string;
-      audio: string;
-      color: string[];
-      id: string;
-      active: boolean;
-    }>
-  >;
+  songs: songsProps[];
+  setCurrentSong: Dispatch<SetStateAction<songsProps>>;
   audioRef: MutableRefObject<null>;
   isPlaying: boolean;
-  setSongs: Dispatch<
-    SetStateAction<
-      {
-        name: string;
-        cover: string;
-        artist: string;
-        audio: string;
-        color: string[];
-        id: string;
-        active: boolean;
-      }[]
-    >
-  >;
+  setSongs: Dispatch<SetStateAction<songsProps[]>>;
   libraryStatus: boolean;
 }) => {
   return (

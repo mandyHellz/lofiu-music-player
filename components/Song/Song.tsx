@@ -1,16 +1,6 @@
-const Song = ({
-  currentSong,
-}: {
-  currentSong: {
-    name: string;
-    cover: string;
-    artist: string;
-    audio: string;
-    color: string[];
-    id: string;
-    active: boolean;
-  };
-}) => {
+import { songsProps } from "../Typings/typings";
+
+const Song = ({ currentSong }: { currentSong: songsProps }) => {
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <img

@@ -6,6 +6,7 @@ import {
   faAngleRight,
   faPause,
 } from "@fortawesome/free-solid-svg-icons";
+import { songsProps, songTimeProps } from "../Typings/typings";
 
 const Player = ({
   currentSong,
@@ -18,63 +19,15 @@ const Player = ({
   setCurrentSong,
   setSongs,
 }: {
-  currentSong: {
-    name: string;
-    cover: string;
-    artist: string;
-    audio: string;
-    color: string[];
-    id: string;
-    active: boolean;
-  };
+  currentSong: songsProps;
   isPlaying: boolean;
   setIsPlaying: Dispatch<SetStateAction<boolean>>;
   audioRef: MutableRefObject<any>;
-  songTime: {
-    currentTime: number;
-    duration: number;
-    animationPercentage: number;
-  };
-  setSongTime: Dispatch<
-    SetStateAction<{
-      currentTime: number;
-      duration: number;
-      animationPercentage: number;
-    }>
-  >;
-  songs: {
-    name: string;
-    cover: string;
-    artist: string;
-    audio: string;
-    color: string[];
-    id: string;
-    active: boolean;
-  }[];
-  setCurrentSong: Dispatch<
-    SetStateAction<{
-      name: string;
-      cover: string;
-      artist: string;
-      audio: string;
-      color: string[];
-      id: string;
-      active: boolean;
-    }>
-  >;
-  setSongs: Dispatch<
-    SetStateAction<
-      {
-        name: string;
-        cover: string;
-        artist: string;
-        audio: string;
-        color: string[];
-        id: string;
-        active: boolean;
-      }[]
-    >
-  >;
+  songTime: songTimeProps;
+  setSongTime: Dispatch<SetStateAction<songTimeProps>>;
+  songs: songsProps[];
+  setCurrentSong: Dispatch<SetStateAction<songsProps>>;
+  setSongs: Dispatch<SetStateAction<songsProps[]>>;
 }) => {
   // Event handlers
   const playSongHandler = () => {
@@ -87,15 +40,7 @@ const Player = ({
     setSongTime({ ...songTime, currentTime: e.target.value });
   };
 
-  const activeLibraryHandler = (nextPrev: {
-    name?: string;
-    cover?: string;
-    artist?: string;
-    audio?: string;
-    color?: string[];
-    id: any;
-    active?: boolean;
-  }) => {
+  const activeLibraryHandler = (nextPrev: songsProps) => {
     const playNewSong = songs.map((song) => {
       if (song.id === nextPrev.id) {
         return { ...song, active: true };
