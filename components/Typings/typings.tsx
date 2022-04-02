@@ -1,5 +1,3 @@
-import { MutableRefObject } from "react";
-
 export interface songsProps {
   name: string;
   cover: string;

@@ -1,22 +1,12 @@
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { useContext } from "react";
+import { SongsContext } from "../../contexts/songsContext";
 import { songsProps } from "../Typings/typings";
 import LibrarySong from "./LibrarySong";
 
-const Library = ({
-  songs,
-  setCurrentSong,
-  audioRef,
-  isPlaying,
-  setSongs,
-  libraryStatus,
-}: {
-  songs: songsProps[];
-  setCurrentSong: Dispatch<SetStateAction<songsProps>>;
-  audioRef: MutableRefObject<null>;
-  isPlaying: boolean;
-  setSongs: Dispatch<SetStateAction<songsProps[]>>;
-  libraryStatus: boolean;
-}) => {
+const Library = ({ libraryStatus }: { libraryStatus: boolean }) => {
+  const { songs, setCurrentSong, audioRef, isPlaying, setSongs } =
+    useContext(SongsContext);
+
   return (
     <div
       className={`library ${
@@ -27,7 +17,7 @@ const Library = ({
     >
       <p className="p-5 text-2xl">Library List</p>
       <div className="library-songs">
-        {songs.map((song) => (
+        {songs.map((song: songsProps) => (
           <LibrarySong
             song={song}
             songs={songs}

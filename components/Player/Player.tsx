@@ -1,34 +1,27 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
+import { useContext } from "react";
 import {
   faPlay,
   faAngleLeft,
   faAngleRight,
   faPause,
 } from "@fortawesome/free-solid-svg-icons";
-import { songsProps, songTimeProps } from "../Typings/typings";
+import { songsProps } from "../Typings/typings";
+import { SongsContext } from "../../contexts/songsContext";
 
-const Player = ({
-  currentSong,
-  isPlaying,
-  setIsPlaying,
-  audioRef,
-  songTime,
-  setSongTime,
-  songs,
-  setCurrentSong,
-  setSongs,
-}: {
-  currentSong: songsProps;
-  isPlaying: boolean;
-  setIsPlaying: Dispatch<SetStateAction<boolean>>;
-  audioRef: MutableRefObject<any>;
-  songTime: songTimeProps;
-  setSongTime: Dispatch<SetStateAction<songTimeProps>>;
-  songs: songsProps[];
-  setCurrentSong: Dispatch<SetStateAction<songsProps>>;
-  setSongs: Dispatch<SetStateAction<songsProps[]>>;
-}) => {
+const Player = () => {
+  const {
+    currentSong,
+    isPlaying,
+    setIsPlaying,
+    audioRef,
+    songTime,
+    setSongTime,
+    songs,
+    setCurrentSong,
+    setSongs,
+  } = useContext(SongsContext);
+
   // Event handlers
   const playSongHandler = () => {
     isPlaying ? audioRef.current.pause() : audioRef.current.play();
@@ -41,7 +34,7 @@ const Player = ({
   };
 
   const activeLibraryHandler = (nextPrev: songsProps) => {
-    const playNewSong = songs.map((song) => {
+    const playNewSong = songs.map((song: { id: string }) => {
       if (song.id === nextPrev.id) {
         return { ...song, active: true };
       } else {
@@ -55,7 +48,9 @@ const Player = ({
   };
 
   const skipTracksHandler = async (direction: string) => {
-    let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
+    let currentIndex = songs.findIndex(
+      (song: { id: any }) => song.id === currentSong.id
+    );
     if (direction === "skip-forward") {
       await setCurrentSong(songs[(currentIndex + 1) % songs.length]);
       activeLibraryHandler(songs[(currentIndex + 1) % songs.length]);

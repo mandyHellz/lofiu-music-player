@@ -1,6 +1,8 @@
-import { songsProps } from "../Typings/typings";
+import { useContext } from "react";
+import { SongsContext } from "../../contexts/songsContext";
 
-const Song = ({ currentSong }: { currentSong: songsProps }) => {
+const Song = () => {
+  const { currentSong } = useContext(SongsContext);
   return (
     <div className="w-full flex flex-col items-center justify-center">
       <img
