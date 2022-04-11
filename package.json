@@ -1,5 +1,5 @@
 {
-  "name": "mkplace-admin",
+  "name": "lofi-u-music-player",
   "private": true,
   "scripts": {
     "dev": "next dev",
